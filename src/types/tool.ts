@@ -1,0 +1,46 @@
+export type ToolCategory = 'content' | 'social' | 'image' | 'productivity' | 'other';
+
+export interface ToolInput {
+  id: string;
+  label: string;
+  type: 'text' | 'textarea' | 'select' | 'number';
+  placeholder?: string;
+  required: boolean;
+  options?: { value: string; label: string }[];
+  defaultValue?: string | number;
+}
+
+export interface ToolVariant {
+  id: string;
+  name: string;
+  description: string;
+  systemPromptPath: string;
+  language?: string;
+}
+
+export interface ToolSettings {
+  maxTokens: number;
+  temperature: number;
+  topP?: number;
+}
+
+export interface ToolConfig {
+  id: string;
+  name: string;
+  description: string;
+  icon: string;
+  category: ToolCategory;
+  
+  // Model configuration
+  defaultModel: string;
+  allowedModels?: string[];
+  
+  // Input configuration
+  inputs: ToolInput[];
+  
+  // Variants (different system instructions)
+  variants: ToolVariant[];
+  
+  // Generation settings
+  settings: ToolSettings;
+}

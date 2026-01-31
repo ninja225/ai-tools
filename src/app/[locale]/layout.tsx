@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
-import { Geist, Geist_Mono } from 'next/font/google';
+import { Space_Grotesk, Inter } from 'next/font/google';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { ThemeProvider } from '@/components/theme-provider';
@@ -10,14 +10,16 @@ import { LanguageToggle } from '@/components/language-toggle';
 import { siteConfig } from '@/config/site';
 import '../globals.css';
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
+const spaceGrotesk = Space_Grotesk({
+  variable: '--font-space-grotesk',
   subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
 });
 
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
+const inter = Inter({
+  variable: '--font-inter',
   subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700'],
 });
 
 export const metadata: Metadata = {
@@ -51,7 +53,7 @@ export default async function RootLayout({
 
   return (
     <html lang={locale} dir={locale === 'ar' ? 'rtl' : 'ltr'} suppressHydrationWarning>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-background`}>
+      <body className={`${spaceGrotesk.variable} ${inter.variable} antialiased min-h-screen bg-background font-sans`}>
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider
             attribute="class"

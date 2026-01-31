@@ -1,6 +1,6 @@
 {
   "site": {
-    "name": "AI Tools Platform",
+    "name": "ToolKo Platform",
     "description": "Personal AI tools collection for content creation across multiple platforms"
   },
   "nav": {
@@ -9,7 +9,7 @@
     "about": "About"
   },
   "home": {
-    "title": "AI Tools Platform",
+    "title": "ToolKo Platform",
     "subtitle": "Personal AI tools collection for content creation across multiple platforms",
     "exploreTools": "Explore Tools"
   },

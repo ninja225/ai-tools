@@ -173,3 +173,59 @@
 .animation-delay-6000 {
   animation-delay: 6s;
 }
+
+/* Animated button glow effects */
+@keyframes glow-slide {
+  0% {
+    transform: translate(-55%);
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  65% {
+    opacity: 0;
+  }
+  100% {
+    transform: translate(55%);
+    opacity: 0;
+  }
+}
+
+@keyframes letter-glow {
+  0% {
+    opacity: 0;
+  }
+  5% {
+    opacity: 1;
+    text-shadow: 0 0 8px var(--accent-brand), 0 0 12px var(--accent-brand);
+    transform: scale(1.1) translateY(-2px);
+  }
+  20% {
+    opacity: 0.2;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.animate-glow-slide {
+  animation: glow-slide 2s infinite alternate, opacity-animation 4s infinite;
+  animation-timing-function: cubic-bezier(0.6, 0.8, 0.5, 1);
+}
+
+.animate-letter-glow {
+  animation: letter-glow 4s infinite linear;
+}
+
+@keyframes opacity-animation {
+  0%, 100% {
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  65% {
+    opacity: 0;
+  }
+}

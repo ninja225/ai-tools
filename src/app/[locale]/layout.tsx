@@ -62,8 +62,8 @@ export default async function RootLayout({
             disableTransitionOnChange
           >
             <header className="border-b">
-              <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-                <Link href={`/${locale}`} className="text-xl font-bold">
+              <div className="px-6 h-16 flex items-center justify-between">
+                <Link href={`/${locale}`} className="text-2xl font-bold font-display retro-shadow">
                   {siteConfig.name}
                 </Link>
                 <div className="flex items-center gap-2">

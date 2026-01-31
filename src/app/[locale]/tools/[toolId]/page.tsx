@@ -2,14 +2,16 @@ import { toolRegistry } from '@/config/tools';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
+import { getTranslations } from 'next-intl/server';
 
 interface PageProps {
-  params: Promise<{ toolId: string }>;
+  params: Promise<{ toolId: string; locale: string }>;
 }
 
 export default async function ToolPage({ params }: PageProps) {
   const { toolId } = await params;
   const tool = toolRegistry.getById(toolId);
+  const t = await getTranslations();
 
   if (!tool) {
     notFound();
@@ -20,11 +22,11 @@ export default async function ToolPage({ params }: PageProps) {
       <div className="max-w-6xl mx-auto">
         <div className="mb-8">
           <Link
-            href="/tools"
-            className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground mb-4"
+            href="../"
+            className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground mb-4 transition-colors"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />
-            Back to Tools
+            {t('tools.backToTools')}
           </Link>
           <h1 className="text-4xl font-bold">{tool.name}</h1>
           <p className="text-muted-foreground mt-2">{tool.description}</p>

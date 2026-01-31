@@ -1,0 +1,45 @@
+{
+  "site": {
+    "name": "AI Tools Platform",
+    "description": "Personal AI tools collection for content creation across multiple platforms"
+  },
+  "nav": {
+    "home": "Home",
+    "tools": "Tools",
+    "about": "About"
+  },
+  "home": {
+    "title": "AI Tools Platform",
+    "subtitle": "Personal AI tools collection for content creation across multiple platforms",
+    "exploreTools": "Explore Tools"
+  },
+  "tools": {
+    "title": "All Tools",
+    "subtitle": "Choose a tool to start creating content",
+    "backToHome": "Back to Home",
+    "backToTools": "Back to Tools",
+    "variantsAvailable": "{count} variant available",
+    "variantsAvailable_other": "{count} variants available"
+  },
+  "toolNames": {
+    "storyCreator": "Story Creator",
+    "socialMediaPost": "Social Media Posts",
+    "imagePrompt": "Image Prompts"
+  },
+  "toolDescriptions": {
+    "storyCreator": "Generate engaging stories for social media, reels, or general content",
+    "socialMediaPost": "Create platform-specific posts optimized for engagement",
+    "imagePrompt": "Create detailed prompts for AI image generators"
+  },
+  "footer": {
+    "copyright": "© {year} {siteName}. All rights reserved."
+  },
+  "theme": {
+    "toggle": "Toggle theme",
+    "light": "Light",
+    "dark": "Dark"
+  },
+  "language": {
+    "change": "Change language"
+  }
+}

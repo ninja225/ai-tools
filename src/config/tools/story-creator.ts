@@ -16,6 +16,16 @@ export const storyCreatorTool: ToolConfig = {
   
   inputs: [
     {
+      id: 'variant',
+      label: 'Story Type',
+      type: 'select',
+      required: true,
+      options: [
+        { value: 'general', label: 'General Story' },
+        { value: 'reels', label: 'Instagram Reels' },
+      ],
+    },
+    {
       id: 'topic',
       label: 'Topic or Theme',
       type: 'textarea',
@@ -63,36 +73,7 @@ export const storyCreatorTool: ToolConfig = {
     },
   ],
   
-  variants: [
-    {
-      id: 'reels',
-      name: 'Instagram Reels',
-      description: 'Hook-driven stories for short video content',
-      systemPromptPath: 'story/reels.md',
-      icon: 'instagram',
-    },
-    {
-      id: 'tiktok',
-      name: 'TikTok Story',
-      description: 'Viral-style storytelling for TikTok',
-      systemPromptPath: 'story/tiktok.md',
-      icon: 'tiktok',
-    },
-    {
-      id: 'general',
-      name: 'General Story',
-      description: 'Classic storytelling format',
-      systemPromptPath: 'story/general.md',
-      lucideIcon: 'book-text',
-    },
-    // {
-    //   id: 'short-form',
-    //   name: 'Short Form Content',
-    //   description: 'Quick, impactful stories',
-    //   systemPromptPath: 'story/short-form.md',
-    //   lucideIcon: 'zap',
-    // },
-  ],
+  variants: [],
   
   settings: {
     maxTokens: 1500,

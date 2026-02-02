@@ -3,11 +3,14 @@ export type ToolCategory = 'content' | 'social' | 'image' | 'productivity' | 'ot
 export interface ToolInput {
   id: string;
   label: string;
-  type: 'text' | 'textarea' | 'select' | 'number';
+  type: 'text' | 'textarea' | 'select' | 'number' | 'file';
   placeholder?: string;
   required: boolean;
   options?: { value: string; label: string }[];
   defaultValue?: string | number;
+  // For file input type
+  accept?: string;
+  maxSize?: number;
 }
 
 export interface ToolVariant {

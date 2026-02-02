@@ -1,17 +1,18 @@
-# 🤖 AI Tools Platform
+# 🤖 ToolKo Platform
 
 > Personal AI tools collection for content creation across multiple platforms
 
-A modular AI-powered content creation platform built with Next.js 16, designed to leverage multiple LLM models via OpenRouter. Each tool operates independently with its own system instructions, model configurations, and output formats.
+A modular AI-powered content creation platform built with Next.js 16, designed to leverage multiple LLM models via OpenRouter. Each tool operates independently with placeholder-based prompts that adapt to user selections, supporting 3 languages (English, Russian, Arabic).
 
 ## ✨ Features
 
-- 🎯 **Multiple AI Tools**: Story Creator, Social Media Post Generator, Image Prompt Generator
-- 🔄 **Multiple Variants**: Each tool has platform-specific variants (Instagram, TikTok, VK, etc.)
+- 🎯 **6 AI Tools**: Story Creator, Post Creator, Scene Creator, Quote Generator, Reels Creator, Scene Mood Describer
+- 🌐 **Multilingual**: Full support for English, Russian, and Arabic with native translations
+- 📝 **Smart Prompts**: Placeholder-based system prompts ({{variant}}, {{platform}}, {{tone}}, etc.) for maintainability
 - 🤖 **Multiple AI Models**: Support for Claude, GPT-4, Gemini via OpenRouter
-- 📝 **Custom System Prompts**: Each variant uses tailored system instructions stored as markdown
-- 🎨 **Modern UI**: Built with Next.js 16, TailwindCSS, and shadcn/ui
-- ⚡ **Type-Safe**: Full TypeScript implementation
+- 🎨 **Modern UI**: Built with Next.js 16, React 19, TailwindCSS, and shadcn/ui
+- ⚡ **Type-Safe**: Full TypeScript implementation with strict mode
+- 🖼️ **Vision AI**: Image upload and analysis for Scene Mood Describer
 
 ## 🚀 Quick Start
 
@@ -60,9 +61,12 @@ ai-tools/
 │   ├── app/                    # Next.js App Router
 │   │   ├── api/                # API routes
 │   │   │   ├── generate/       # Generation endpoint
-│   │   │   └── tools/          # Tools listing endpoint
-│   │   ├── tools/              # Tools pages
-│   │   └── layout.tsx          # Root layout
+   │   │   ├── tools/          # Tools listing endpoint
+   │   │   └── analyze-scene-mood/ # Vision AI endpoint
+   │   ├── [locale]/           # Internationalized pages
+   │   │   ├── tools/          # Tools pages
+   │   │   └── layout.tsx      # Localized layout
+   │   └── globals.css         # Global styles
 │   │
 │   ├── components/             # React components
 │   │   ├── ui/                 # shadcn/ui components
@@ -94,46 +98,59 @@ ai-tools/
 
 ## 🛠️ Available Tools
 
-### 1. Story Creator
-Generate engaging stories for social media and content platforms.
+### 1. Story Creator 📖 (P1 - MVP)
+Generate engaging stories for social media, reels, or general content.
 
-**Variants:**
-- Instagram Reels
-- TikTok Story
-- General Story
-- Short Form Content
-
+**Inputs:** Topic, Variant (General/Reels), Tone (8 options), Length, Language  
+**Output:** Formatted story text optimized for selected variant  
 **Use Cases:** Social media content, video scripts, blog posts
 
-### 2. Social Media Post Generator
-Create platform-specific posts optimized for engagement.
+### 2. Post Creator 📱 (P1 - MVP)
+Create platform-specific posts optimized for Russian social networks and Facebook.
 
-**Variants:**
-- VKontakte (Russian)
-- Yandex Dzen (Russian)
-- Facebook
-- Instagram
-- General Social
+**Inputs:** Topic, Platform (VK/Dzen/Facebook), Tone, Language  
+**Output:** Platform-optimized post with proper length and formatting  
+**Use Cases:** Social media marketing, content planning, engagement optimization
 
-**Use Cases:** Social media marketing, content planning
+### 3. Scene Creator 🎬 (P2)
+Convert story text into professional video scene descriptions with cinematography details.
 
-### 3. Image Prompt Generator
-Create detailed prompts for AI image generators.
+**Inputs:** Story Text, Language  
+**Output:** 3-7 XML-formatted scenes with visual, camera, lighting, action, mood, duration, transition  
+**Use Cases:** Video production, AI video generation, storyboarding
 
-**Variants:**
-- Midjourney Style
-- DALL-E Style
+### 4. Quote Generator 💬 (P2)
+Generate fresh, non-clichéd quotes under 100 characters for 8 themes.
 
-**Use Cases:** AI art generation, creative projects
+**Inputs:** Theme (Motivation/Wisdom/Life/Love/Success/Happiness/Strength/Creativity), Quantity, Language  
+**Output:** Numbered list of original quotes  
+**Use Cases:** Social media graphics, inspirational content, typography projects
+
+### 5. Reels Creator 🎥 (P3)
+Generate complete reels package: concept, voice-over script, and video scene prompts.
+
+**Inputs:** Topic, Language  
+**Output:** XML package with concept (hook/message/rationale), script (30-60s with [PAUSE]/[EMPHASIS] markers), 3-5 scenes  
+**Use Cases:** Instagram Reels, TikTok, YouTube Shorts production
+
+### 6. Scene Mood Describer 🖼️ (P3)
+Upload an image and get detailed AI regeneration prompts with mood, lighting, and composition analysis.
+
+**Inputs:** Image file (JPEG/PNG/WebP, max 10MB), Language  
+**Output:** Single paragraph prompt (150-300 words) optimized for Midjourney, DALL-E, Stable Diffusion  
+**Use Cases:** AI art recreation, aesthetic analysis, photography learning
 
 ## 🔧 Tech Stack
 
 | Category | Technology |
 |----------|------------|
-| Framework | Next.js 16 (App Router) |
-| Language | TypeScript |
+| Framework | Next.js 16.1.6 (App Router) |
+| Frontend | React 19.2.3 |
+| Language | TypeScript 5+ (Strict Mode) |
 | Styling | TailwindCSS + shadcn/ui |
+| I18n | next-intl 4.8.1 |
 | AI API | OpenRouter |
+| Validation | Zod 4.3.6 |
 | Icons | Lucide React |
 | Package Manager | pnpm |
 

@@ -26,12 +26,16 @@
   "toolNames": {
     "storyCreator": "منشئ القصص",
     "socialMediaPost": "منشورات وسائل التواصل",
-    "imagePrompt": "مطالبات الصور"
+    "sceneCreator": "منشئ المشاهد",
+    "quoteGenerator": "مولد الاقتباسات",
+    "reelsCreator": "منشئ ريلز",
+    "sceneMoodDescriber": "محلل حالة المشهد"
   },
   "toolDescriptions": {
     "storyCreator": "إنشاء قصص جذابة لوسائل التواصل الاجتماعي أو المحتوى العام",
     "socialMediaPost": "إنشاء منشورات محسّنة للتفاعل على منصات محددة",
-    "imagePrompt": "إنشاء مطالبات مفصلة لمولدات الصور بالذكاء الاصطناعي"
+    "sceneCreator": "تحويل نص القصة إلى مطالبات مشهد فيديو مفصلة",
+    "quoteGenerator": "قم بإنشاء اقتباسات جديدة وغير مبتذلة أقل من 100 حرف لمواضيع مختلفة"
   },
   "footer": {
     "copyright": "© {year} {siteName}. جميع الحقوق محفوظة."
@@ -43,5 +47,74 @@
   },
   "language": {
     "change": "تغيير اللغة"
+  },
+  "tools": {
+    "title": "جميع الأدوات",
+    "subtitle": "اختر أداة لبدء إنشاء المحتوى",
+    "backToHome": "العودة للرئيسية",
+    "backToTools": "العودة للأدوات",
+    "seeMore": "شاهد المزيد",
+    "chooseVariant": "اختر متغير",
+    "variantsAvailable": "{count} متغير متاح",
+    "variantsAvailable_other": "{count} متغيرات متاحة",
+    "imageUpload": {
+      "clickToUpload": "انقر لتحميل الصورة",
+      "supportedFormats": "المدعوم: {formats} (الحد الأقصى {maxSize}ميجابايت)",
+      "errors": {
+        "tooLarge": "الملف كبير جداً. الحجم الأقصى: {maxSize}ميجابايت",
+        "invalidType": "نوع ملف غير صالح. يرجى تحميل صورة."
+      }
+    }
+  },
+  "ui": {
+    "buttons": {
+      "submit": "توليد",
+      "cancel": "إلغاء",
+      "retry": "إعادة المحاولة",
+      "copy": "نسخ",
+      "copied": "تم النسخ!",
+      "clear": "مسح",
+      "upload": "تحميل"
+    },
+    "labels": {
+      "topic": "الموضوع أو الفكرة",
+      "language": "لغة الإخراج",
+      "tone": "النبرة",
+      "length": "الطول",
+      "quantity": "الكمية",
+      "platform": "المنصة",
+      "theme": "الموضوع",
+      "image": "الصورة",
+      "storyText": "نص القصة"
+    },
+    "placeholders": {
+      "enterTopic": "عن ماذا يجب أن يكون المحتوى؟",
+      "pasteStory": "الصق نص القصة هنا...",
+      "selectLanguage": "اختر اللغة",
+      "selectTone": "اختر النبرة",
+      "selectLength": "اختر الطول"
+    },
+    "loading": {
+      "generating": "جاري توليد المحتوى...",
+      "analyzing": "جاري تحليل الصورة...",
+      "estimatedTime": "الوقت المقدر: {seconds}ث",
+      "pleaseWait": "يرجى الانتظار"
+    },
+    "errors": {
+      "required": "هذا الحقل مطلوب",
+      "apiError": "حدث خطأ. يرجى المحاولة مرة أخرى.",
+      "networkError": "خطأ في الشبكة. تحقق من اتصالك.",
+      "unexpectedError": "حدث خطأ غير متوقع"
+    },
+    "copyButton": {
+      "copy": "نسخ إلى الحافظة",
+      "copied": "تم النسخ!",
+      "failed": "فشل النسخ"
+    },
+    "validation": {
+      "required": "حقل مطلوب",
+      "min": "الحد الأدنى {min}",
+      "max": "الحد الأقصى {max}"
+    }
   }
 }

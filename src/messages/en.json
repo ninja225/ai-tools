@@ -26,12 +26,16 @@
   "toolNames": {
     "storyCreator": "Story Creator",
     "socialMediaPost": "Social Media Posts",
-    "imagePrompt": "Image Prompts"
+    "sceneCreator": "Scene Creator",
+    "quoteGenerator": "Quote Generator",
+    "reelsCreator": "Reels Creator",
+    "sceneMoodDescriber": "Scene Mood Describer"
   },
   "toolDescriptions": {
     "storyCreator": "Generate engaging stories for social media, reels, or general content",
     "socialMediaPost": "Create platform-specific posts optimized for engagement",
-    "imagePrompt": "Create detailed prompts for AI image generators"
+    "sceneCreator": "Convert story text into detailed video scene prompts",
+    "quoteGenerator": "Generate fresh, non-clichéd quotes under 100 characters for various themes"
   },
   "footer": {
     "copyright": "© {year} {siteName}. All rights reserved."
@@ -43,5 +47,74 @@
   },
   "language": {
     "change": "Change language"
+  },
+  "tools": {
+    "title": "All Tools",
+    "subtitle": "Choose a tool to start creating content",
+    "backToHome": "Back to Home",
+    "backToTools": "Back to Tools",
+    "seeMore": "See more",
+    "chooseVariant": "Choose a variant",
+    "variantsAvailable": "{count} variant available",
+    "variantsAvailable_other": "{count} variants available",
+    "imageUpload": {
+      "clickToUpload": "Click to upload image",
+      "supportedFormats": "Supported: {formats} (Max {maxSize}MB)",
+      "errors": {
+        "tooLarge": "File too large. Maximum size: {maxSize}MB",
+        "invalidType": "Invalid file type. Please upload an image."
+      }
+    }
+  },
+  "ui": {
+    "buttons": {
+      "submit": "Generate",
+      "cancel": "Cancel",
+      "retry": "Retry",
+      "copy": "Copy",
+      "copied": "Copied!",
+      "clear": "Clear",
+      "upload": "Upload"
+    },
+    "labels": {
+      "topic": "Topic or Theme",
+      "language": "Output Language",
+      "tone": "Tone",
+      "length": "Length",
+      "quantity": "Quantity",
+      "platform": "Platform",
+      "theme": "Theme",
+      "image": "Image",
+      "storyText": "Story Text"
+    },
+    "placeholders": {
+      "enterTopic": "What should this be about?",
+      "pasteStory": "Paste your story text here...",
+      "selectLanguage": "Select language",
+      "selectTone": "Select tone",
+      "selectLength": "Select length"
+    },
+    "loading": {
+      "generating": "Generating content...",
+      "analyzing": "Analyzing image...",
+      "estimatedTime": "Estimated time: {seconds}s",
+      "pleaseWait": "Please wait"
+    },
+    "errors": {
+      "required": "This field is required",
+      "apiError": "An error occurred. Please try again.",
+      "networkError": "Network error. Check your connection.",
+      "unexpectedError": "Unexpected error occurred"
+    },
+    "copyButton": {
+      "copy": "Copy to clipboard",
+      "copied": "Copied!",
+      "failed": "Failed to copy"
+    },
+    "validation": {
+      "required": "Required field",
+      "min": "Minimum {min}",
+      "max": "Maximum {max}"
+    }
   }
 }

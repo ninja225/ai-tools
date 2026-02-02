@@ -1,13 +1,26 @@
 import { toolRegistry } from '@/lib/tools/registry';
 import { storyCreatorTool } from './story-creator';
-import { socialMediaPostTool } from './social-media-post';
-import { imagePromptTool } from './image-prompt';
+import { postCreatorTool } from './post-creator';
+import { sceneCreatorTool } from './scene-creator';
+import { quoteGeneratorTool } from './quote-generator';
+import { reelsCreatorTool } from './reels-creator';
+import { sceneMoodDescriberTool } from './scene-mood-describer';
 
 // Register all tools
 toolRegistry.register(storyCreatorTool);
-toolRegistry.register(socialMediaPostTool);
-toolRegistry.register(imagePromptTool);
+toolRegistry.register(postCreatorTool);
+toolRegistry.register(sceneCreatorTool);
+toolRegistry.register(quoteGeneratorTool);
+toolRegistry.register(reelsCreatorTool);
+toolRegistry.register(sceneMoodDescriberTool);
 
 // Export for convenience
-export { storyCreatorTool, socialMediaPostTool, imagePromptTool };
+export { 
+  storyCreatorTool, 
+  postCreatorTool, 
+  sceneCreatorTool, 
+  quoteGeneratorTool, 
+  reelsCreatorTool,
+  sceneMoodDescriberTool
+};
 export { toolRegistry };

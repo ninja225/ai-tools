@@ -18,6 +18,8 @@
     "subtitle": "Выберите инструмент для начала создания контента",
     "backToHome": "Вернуться на Главную",
     "backToTools": "Вернуться к Инструментам",
+    "seeMore": "Подробнее",
+    "chooseVariant": "Выберите вариант",
     "variantsAvailable": "{count} вариант доступен",
     "variantsAvailable_other": "{count} вариантов доступно"
   },

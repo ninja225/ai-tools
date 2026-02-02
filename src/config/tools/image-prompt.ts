@@ -7,11 +7,11 @@ export const imagePromptTool: ToolConfig = {
   icon: 'image',
   category: 'image',
   
-  defaultModel: 'anthropic/claude-3-haiku',
+  defaultModel: 'arcee-ai/trinity-large-preview:free',
   allowedModels: [
-    'anthropic/claude-3-haiku',
-    'anthropic/claude-3-sonnet',
-    'openai/gpt-4o-mini',
+    'arcee-ai/trinity-mini:free',
+    'openai/gpt-oss-120b:free',
+    'deepseek/deepseek-r1-0528:free',
   ],
   
   inputs: [
@@ -69,12 +69,14 @@ export const imagePromptTool: ToolConfig = {
       name: 'Midjourney Style',
       description: 'Prompts optimized for Midjourney',
       systemPromptPath: 'image/midjourney-style.md',
+      lucideIcon: 'sparkles',
     },
     {
       id: 'dalle',
       name: 'DALL-E Style',
       description: 'Prompts optimized for DALL-E',
       systemPromptPath: 'image/dalle-style.md',
+      lucideIcon: 'palette',
     },
   ],
   

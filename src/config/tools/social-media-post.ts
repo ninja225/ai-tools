@@ -7,12 +7,11 @@ export const socialMediaPostTool: ToolConfig = {
   icon: 'share-2',
   category: 'social',
   
-  defaultModel: 'anthropic/claude-3-haiku',
+  defaultModel: 'arcee-ai/trinity-large-preview:free',
   allowedModels: [
-    'anthropic/claude-3-haiku',
-    'anthropic/claude-3-sonnet',
-    'openai/gpt-4o-mini',
-    'google/gemini-flash-1.5',
+    'arcee-ai/trinity-mini:free',
+    'openai/gpt-oss-120b:free',
+    'deepseek/deepseek-r1-0528:free',
   ],
   
   inputs: [
@@ -52,6 +51,7 @@ export const socialMediaPostTool: ToolConfig = {
       description: 'Posts optimized for VK audience',
       systemPromptPath: 'social/vk.md',
       language: 'ru',
+      icon: 'vk',
     },
     {
       id: 'dzen',
@@ -59,24 +59,28 @@ export const socialMediaPostTool: ToolConfig = {
       description: 'Content for Yandex Dzen platform',
       systemPromptPath: 'social/dzen.md',
       language: 'ru',
+      customIconPath: '/icons/yandex.svg',
     },
     {
       id: 'facebook',
       name: 'Facebook',
       description: 'Facebook-optimized posts',
       systemPromptPath: 'social/facebook.md',
+      icon: 'facebook',
     },
     {
       id: 'instagram',
       name: 'Instagram',
       description: 'Instagram caption format',
       systemPromptPath: 'social/instagram.md',
+      icon: 'instagram',
     },
     {
       id: 'general',
       name: 'General Social',
       description: 'Universal social media post',
       systemPromptPath: 'social/general.md',
+      icon: 'share',
     },
   ],
   

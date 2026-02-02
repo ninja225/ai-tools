@@ -18,6 +18,8 @@
     "subtitle": "Choose a tool to start creating content",
     "backToHome": "Back to Home",
     "backToTools": "Back to Tools",
+    "seeMore": "See more",
+    "chooseVariant": "Choose a variant",
     "variantsAvailable": "{count} variant available",
     "variantsAvailable_other": "{count} variants available"
   },

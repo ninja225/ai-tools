@@ -4,8 +4,6 @@ import { getMessages } from 'next-intl/server';
 import { Space_Grotesk, Inter } from 'next/font/google';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { ThemeProvider } from '@/components/theme-provider';
-import { ThemeToggle } from '@/components/theme-toggle';
 import { LanguageToggle } from '@/components/language-toggle';
 import { siteConfig } from '@/config/site';
 import '../globals.css';
@@ -52,33 +50,25 @@ export default async function RootLayout({
   const messages = await getMessages();
 
   return (
-    <html lang={locale} dir={locale === 'ar' ? 'rtl' : 'ltr'} suppressHydrationWarning>
-      <body className={`${spaceGrotesk.variable} ${inter.variable} antialiased min-h-screen bg-background font-sans`}>
+    <html lang={locale} dir={locale === 'ar' ? 'rtl' : 'ltr'} className="dark">
+      <body className={`${spaceGrotesk.variable} ${inter.variable} antialiased min-h-screen bg-background font-sans`} suppressHydrationWarning>
         <NextIntlClientProvider messages={messages}>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="dark"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <header className="border-b">
-              <div className="px-6 h-16 flex items-center justify-between">
-                <Link href={`/${locale}`} className="text-2xl font-bold font-display retro-shadow">
-                  {siteConfig.name}
-                </Link>
-                <div className="flex items-center gap-2">
-                  <LanguageToggle />
-                  <ThemeToggle />
-                </div>
+          <header className="border-b">
+            <div className="px-6 h-16 flex items-center justify-between">
+              <Link href={`/${locale}`} className="text-2xl font-bold font-display retro-shadow">
+                {siteConfig.name}
+              </Link>
+              <div className="flex items-center gap-2">
+                <LanguageToggle />
               </div>
-            </header>
-            <main>{children}</main>
-            <footer className="border-t py-6 mt-16">
-              <div className="container mx-auto px-4 text-center text-sm text-muted-foreground">
-                <p>© {new Date().getFullYear()} {siteConfig.name}. All rights reserved.</p>
-              </div>
-            </footer>
-          </ThemeProvider>
+            </div>
+          </header>
+          <main>{children}</main>
+          <footer className="border-t py-6 mt-16">
+            <div className="container mx-auto px-4 text-center text-sm text-muted-foreground">
+              <p>© {new Date().getFullYear()} {siteConfig.name}. All rights reserved.</p>
+            </div>
+          </footer>
         </NextIntlClientProvider>
       </body>
     </html>

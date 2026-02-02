@@ -16,6 +16,9 @@ export interface ToolVariant {
   description: string;
   systemPromptPath: string;
   language?: string;
+  icon?: string;
+  customIconPath?: string;
+  lucideIcon?: string;
 }
 
 export interface ToolSettings {

@@ -7,13 +7,11 @@ export const storyCreatorTool: ToolConfig = {
   icon: 'book-open',
   category: 'content',
   
-  defaultModel: 'anthropic/claude-3-haiku',
+  defaultModel: 'arcee-ai/trinity-large-preview:free',
   allowedModels: [
-    'anthropic/claude-3-haiku',
-    'anthropic/claude-3-sonnet',
-    'anthropic/claude-3.5-sonnet',
-    'openai/gpt-4o-mini',
-    'google/gemini-flash-1.5',
+    'arcee-ai/trinity-mini:free',
+    'openai/gpt-oss-120b:free',
+    'deepseek/deepseek-r1-0528:free',
   ],
   
   inputs: [
@@ -25,6 +23,17 @@ export const storyCreatorTool: ToolConfig = {
       required: true,
     },
     {
+      id: 'language',
+      label: 'Output Language',
+      type: 'select',
+      required: true,
+      options: [
+        { value: 'english', label: 'English' },
+        { value: 'russian', label: 'Russian' },
+        { value: 'arabic', label: 'Arabic' },
+      ],
+    },
+    {
       id: 'tone',
       label: 'Tone',
       type: 'select',
@@ -33,8 +42,12 @@ export const storyCreatorTool: ToolConfig = {
         { value: 'engaging', label: 'Engaging' },
         { value: 'emotional', label: 'Emotional' },
         { value: 'funny', label: 'Funny' },
-        { value: 'inspiring', label: 'Inspiring' },
         { value: 'dramatic', label: 'Dramatic' },
+        { value: 'sad', label: 'Sad' },
+        { value: 'hopeful', label: 'Hopeful' },
+        { value: 'motivational', label: 'Motivational' },
+        { value: 'fantasy', label: 'Fantasy' },
+
       ],
     },
     {
@@ -56,25 +69,29 @@ export const storyCreatorTool: ToolConfig = {
       name: 'Instagram Reels',
       description: 'Hook-driven stories for short video content',
       systemPromptPath: 'story/reels.md',
+      icon: 'instagram',
     },
     {
       id: 'tiktok',
       name: 'TikTok Story',
       description: 'Viral-style storytelling for TikTok',
       systemPromptPath: 'story/tiktok.md',
+      icon: 'tiktok',
     },
     {
       id: 'general',
       name: 'General Story',
       description: 'Classic storytelling format',
       systemPromptPath: 'story/general.md',
+      lucideIcon: 'book-text',
     },
-    {
-      id: 'short-form',
-      name: 'Short Form Content',
-      description: 'Quick, impactful stories',
-      systemPromptPath: 'story/short-form.md',
-    },
+    // {
+    //   id: 'short-form',
+    //   name: 'Short Form Content',
+    //   description: 'Quick, impactful stories',
+    //   systemPromptPath: 'story/short-form.md',
+    //   lucideIcon: 'zap',
+    // },
   ],
   
   settings: {

@@ -9,7 +9,7 @@ export const sceneCreatorTool: ToolConfig = {
   
   defaultModel: 'allenai/molmo-2-8b:free', //vision model supports image/video input
   allowedModels: [
-    
+    'allenai/molmo-2-8b:free',
     'arcee-ai/trinity-mini:free',
     'openai/gpt-oss-120b:free',
     'deepseek/deepseek-r1-0528:free',
@@ -36,7 +36,14 @@ export const sceneCreatorTool: ToolConfig = {
     },
   ],
   
-  variants: [],
+  variants: [
+    {
+      id: 'scene-creator',
+      name: 'Scene Description',
+      description: 'Create vivid scene descriptions from images',
+      systemPromptPath: '/prompts/scene/{lang}.md',
+    },
+  ],
   
   settings: {
     maxTokens: 2000,

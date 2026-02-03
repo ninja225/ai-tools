@@ -1,8 +1,8 @@
 'use client';
 
-import Link from 'next/link';
 import { LucideIcon } from 'lucide-react';
-import { ReactNode } from 'react';
+import { BaseCard } from './base-card';
+import { cn } from '@/lib/utils';
 
 interface ToolCardProps {
   title: string;
@@ -14,6 +14,14 @@ interface ToolCardProps {
   variantText?: string;
 }
 
+// Category-specific accent colors
+const CATEGORY_COLORS = {
+  content: 'bg-amber-500/20 text-amber-500 border-amber-500/30',
+  social: 'bg-purple-500/20 text-purple-500 border-purple-500/30',
+  analysis: 'bg-blue-500/20 text-blue-500 border-blue-500/30',
+  default: 'bg-[var(--accent-brand)]/20 text-[var(--accent-brand)] border-[var(--accent-brand)]/30',
+};
+
 export function ToolCard({ 
   title, 
   description, 
@@ -23,11 +31,27 @@ export function ToolCard({
   variantCount,
   variantText = 'See more'
 }: ToolCardProps) {
+  const categoryColor = CATEGORY_COLORS[category as keyof typeof CATEGORY_COLORS] || CATEGORY_COLORS.default;
+  
   return (
-    <Link 
+    <BaseCard 
       href={href}
-      className="w-full h-[400px] bg-neutral-800 rounded-3xl text-neutral-300 p-6 flex flex-col items-start justify-between gap-4 hover:bg-gray-900 hover:shadow-2xl hover:shadow-[var(--accent-brand)]/40 transition-all duration-300 group"
+      glowIntensity="low"
+      className="h-[400px] p-6 flex flex-col items-start justify-between gap-4 group"
     >
+      {/* Category badge - top right corner */}
+      <div className="absolute top-4 right-4 z-20">
+        <span className={cn(
+          'text-xs font-semibold uppercase tracking-wider px-3 py-1.5 rounded-full border',
+          categoryColor
+        )}>
+          {category === 'content' && 'Content'}
+          {category === 'social' && 'Social'}
+          {category === 'analysis' && 'Analysis'}
+          {!['content', 'social', 'analysis'].includes(category) && category}
+        </span>
+      </div>
+      
       {/* Icon/Image Area */}
       <div className="w-full h-48 bg-gradient-to-br from-[var(--accent-brand)]/20 to-[var(--accent-shadow)]/20 rounded-2xl flex items-center justify-center relative overflow-hidden border border-[var(--accent-brand)]/20">
         {/* Grain overlay */}
@@ -45,11 +69,6 @@ export function ToolCard({
       
       {/* Content */}
       <div className="flex-1 flex flex-col gap-2">
-        <div className="mb-1">
-          <span className="text-xs font-medium px-3 py-1 rounded-full bg-[var(--accent-brand)]/20 text-[var(--accent-brand)] border border-[var(--accent-brand)]/30">
-            {category}
-          </span>
-        </div>
         <p className="font-extrabold text-xl text-white font-display">{title}</p>
         <p className="text-sm text-neutral-400 line-clamp-2">{description}</p>
       </div>
@@ -58,6 +77,6 @@ export function ToolCard({
       <button className="w-full bg-[var(--accent-brand)] text-black font-extrabold py-3 px-6 rounded-xl hover:brightness-110 transition-all duration-200 shadow-lg group-hover:shadow-[var(--accent-brand)]/50">
         {variantText} {variantCount && `(${variantCount})`}
       </button>
-    </Link>
+    </BaseCard>
   );
 }

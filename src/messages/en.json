@@ -48,6 +48,67 @@
   "language": {
     "change": "Change language"
   },
+  "categories": {
+    "all": "All Tools",
+    "contentCreation": "Content Creation",
+    "imageAnalysis": "Image Analysis",
+    "socialMedia": "Social Media"
+  },
+  "filters": {
+    "showingCount": "Showing {count} tool",
+    "showingCount_other": "Showing {count} tools",
+    "noToolsFound": "No tools found",
+    "noToolsDescription": "Try selecting a different category",
+    "clearFilters": "Clear filters"
+  },
+  "forms": {
+    "required": "Required",
+    "optional": "Optional",
+    "placeholder": {
+      "topic": "Enter your topic",
+      "description": "Enter description",
+      "platform": "Select platform",
+      "tone": "Select tone",
+      "style": "Select style",
+      "mood": "Select mood",
+      "language": "Select language",
+      "duration": "Select duration",
+      "analysisDepth": "Select analysis depth",
+      "length": "Select length"
+    },
+    "labels": {
+      "variant": "Variant",
+      "topic": "Topic",
+      "description": "Description",
+      "platform": "Platform",
+      "tone": "Tone",
+      "style": "Style",
+      "mood": "Mood",
+      "language": "Language",
+      "duration": "Duration",
+      "analysisDepth": "Analysis Depth",
+      "length": "Length",
+      "image": "Image"
+    },
+    "buttons": {
+      "generate": "Generate",
+      "cancel": "Cancel",
+      "retry": "Retry",
+      "upload": "Upload Image",
+      "clear": "Clear"
+    }
+  },
+  "errors": {
+    "timeout": "Generation timed out after 15 seconds. Please try again.",
+    "validation": "Invalid input. Please check your form fields.",
+    "generation": "Failed to generate content. Please try again.",
+    "network": "Network error. Please check your connection.",
+    "fileSize": "File size must be less than 10MB",
+    "fileType": "Only JPEG, PNG, WebP, and GIF images are allowed",
+    "minLength": "Must be at least {min} characters",
+    "maxLength": "Must be less than {max} characters",
+    "required": "This field is required"
+  },
   "tools": {
     "title": "All Tools",
     "subtitle": "Choose a tool to start creating content",

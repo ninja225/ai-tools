@@ -1,4 +1,4 @@
-export type ToolCategory = 'content' | 'social' | 'image' | 'productivity' | 'other';
+export type ToolCategory = 'content' | 'social' | 'analysis' | 'productivity' | 'other';
 
 export interface ToolInput {
   id: string;

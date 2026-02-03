@@ -9,6 +9,7 @@ export const quoteGeneratorTool: ToolConfig = {
   
   defaultModel: 'arcee-ai/trinity-large-preview:free',
   allowedModels: [
+    'arcee-ai/trinity-large-preview:free',
     'arcee-ai/trinity-mini:free',
     'openai/gpt-oss-120b:free',
     'deepseek/deepseek-r1-0528:free',
@@ -52,7 +53,14 @@ export const quoteGeneratorTool: ToolConfig = {
     },
   ],
   
-  variants: [],
+  variants: [
+    {
+      id: 'quote-generator',
+      name: 'Quote Generator',
+      description: 'Generate inspiring and engaging quotes',
+      systemPromptPath: '/prompts/quote/{lang}.md',
+    },
+  ],
   
   settings: {
     maxTokens: 1000,

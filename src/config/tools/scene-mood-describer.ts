@@ -5,7 +5,7 @@ export const sceneMoodDescriberTool: ToolConfig = {
   name: 'Scene Mood Describer',
   description: 'Upload an image and get detailed AI regeneration prompts with mood, lighting, and composition analysis',
   icon: 'image',
-  category: 'content',
+  category: 'analysis',
   
   defaultModel: 'google/gemini-2.0-flash-exp:free',
   allowedModels: [
@@ -35,7 +35,14 @@ export const sceneMoodDescriberTool: ToolConfig = {
     },
   ],
   
-  variants: [],
+  variants: [
+    {
+      id: 'scene-mood-describer',
+      name: 'Scene Mood Analysis',
+      description: 'Analyze the mood and atmosphere of images',
+      systemPromptPath: '/prompts/scene-mood/{lang}.md',
+    },
+  ],
   
   settings: {
     maxTokens: 1500,

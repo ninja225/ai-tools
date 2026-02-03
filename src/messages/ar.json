@@ -48,6 +48,67 @@
   "language": {
     "change": "تغيير اللغة"
   },
+  "categories": {
+    "all": "جميع الأدوات",
+    "contentCreation": "إنشاء المحتوى",
+    "imageAnalysis": "تحليل الصور",
+    "socialMedia": "وسائل التواصل الاجتماعي"
+  },
+  "filters": {
+    "showingCount": "عرض {count} أداة",
+    "showingCount_other": "عرض {count} أدوات",
+    "noToolsFound": "لم يتم العثور على أدوات",
+    "noToolsDescription": "جرب اختيار فئة مختلفة",
+    "clearFilters": "مسح المرشحات"
+  },
+  "forms": {
+    "required": "مطلوب",
+    "optional": "اختياري",
+    "placeholder": {
+      "topic": "أدخل الموضوع",
+      "description": "أدخل الوصف",
+      "platform": "اختر المنصة",
+      "tone": "اختر النبرة",
+      "style": "اختر الأسلوب",
+      "mood": "اختر الحالة",
+      "language": "اختر اللغة",
+      "duration": "اختر المدة",
+      "analysisDepth": "اختر عمق التحليل",
+      "length": "اختر الطول"
+    },
+    "labels": {
+      "variant": "المتغير",
+      "topic": "الموضوع",
+      "description": "الوصف",
+      "platform": "المنصة",
+      "tone": "النبرة",
+      "style": "الأسلوب",
+      "mood": "الحالة",
+      "language": "اللغة",
+      "duration": "المدة",
+      "analysisDepth": "عمق التحليل",
+      "length": "الطول",
+      "image": "الصورة"
+    },
+    "buttons": {
+      "generate": "توليد",
+      "cancel": "إلغاء",
+      "retry": "إعادة المحاولة",
+      "upload": "تحميل صورة",
+      "clear": "مسح"
+    }
+  },
+  "errors": {
+    "timeout": "انتهت مهلة التوليد بعد 15 ثانية. يرجى المحاولة مرة أخرى.",
+    "validation": "إدخال غير صالح. يرجى التحقق من حقول النموذج.",
+    "generation": "فشل في إنشاء المحتوى. يرجى المحاولة مرة أخرى.",
+    "network": "خطأ في الشبكة. يرجى التحقق من اتصالك.",
+    "fileSize": "يجب أن يكون حجم الملف أقل من 10 ميجابايت",
+    "fileType": "مسموح فقط بصور JPEG و PNG و WebP و GIF",
+    "minLength": "يجب أن يكون {min} حرف على الأقل",
+    "maxLength": "يجب أن يكون أقل من {max} حرف",
+    "required": "هذا الحقل مطلوب"
+  },
   "tools": {
     "title": "جميع الأدوات",
     "subtitle": "اختر أداة لبدء إنشاء المحتوى",

@@ -1,78 +1,91 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { sceneMoodDescriberSchema } from '@/lib/validation/tool-input-schemas';
+import { z } from 'zod';
+import path from 'path';
 
 const OPENROUTER_API_URL = 'https://openrouter.ai/api/v1/chat/completions';
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { image, language = 'english', model = 'google/gemini-2.0-flash-exp:free' } = body;
 
-    // Validation
-    if (!image || typeof image !== 'string') {
+    // Validate with Zod schema
+    let validatedData;
+    try {
+      validatedData = sceneMoodDescriberSchema.parse(body);
+    } catch (err) {
+      if (err instanceof z.ZodError) {
+        return NextResponse.json(
+          { error: 'Validation failed', details: err.issues },
+          { status: 400 }
+        );
+      }
+      throw err;
+    }
+
+    const { variant, image, analysisDepth, language } = validatedData;
+
+    // Image is an object with { type, size, data } where data is base64 string
+    if (!image || !image.data) {
       return NextResponse.json(
-        { error: 'Invalid image data', details: { image: 'Base64 image data required' } },
+        { error: 'Image is required' },
         { status: 400 }
       );
     }
 
-    // Validate base64 data URL format
-    if (!image.startsWith('data:image/')) {
-      return NextResponse.json(
-        { error: 'Invalid image format', details: { image: 'Must be base64 data URL (data:image/...)' } },
-        { status: 400 }
-      );
-    }
+    const imageData = image.data; // Base64 string
 
-    // Extract MIME type
-    const mimeMatch = image.match(/data:(image\/[a-z]+);base64,/);
-    if (!mimeMatch) {
-      return NextResponse.json(
-        { error: 'Invalid image format', details: { image: 'Could not parse MIME type' } },
-        { status: 400 }
-      );
-    }
+    // Extract MIME type for metadata
+    const mimeMatch = imageData.match(/data:(image\/[a-z]+);base64,/);
+    const mimeType = mimeMatch ? mimeMatch[1] : 'image/unknown';
 
-    const mimeType = mimeMatch[1];
-    const validTypes = ['image/jpeg', 'image/png', 'image/webp'];
-    if (!validTypes.includes(mimeType)) {
-      return NextResponse.json(
-        {
-          error: 'Unsupported image format',
-          details: {
-            image: 'Only JPEG, PNG, and WebP formats are supported',
-            detectedFormat: mimeType,
-          },
-        },
-        { status: 400 }
-      );
-    }
-
-    // Estimate file size (base64 is ~1.33x larger than binary)
-    const base64Data = image.split(',')[1];
+    // Estimate file size for metadata
+    const base64Data = imageData.split(',')[1];
     const estimatedSize = (base64Data.length * 3) / 4;
-    const maxSize = 10 * 1024 * 1024; // 10MB
 
-    if (estimatedSize > maxSize) {
-      return NextResponse.json(
-        {
-          error: 'Invalid image',
-          details: {
-            image: 'File size exceeds 10MB limit',
-            maxSize,
-            estimatedSize: Math.round(estimatedSize),
-          },
-        },
-        { status: 400 }
-      );
-    }
+    // Map language to file suffix
+    const langMap: Record<string, string> = {
+      'english': 'en',
+      'russian': 'ru',
+      'arabic': 'ar',
+      'en': 'en',
+      'ru': 'ru',
+      'ar': 'ar',
+    };
+    const langCode = langMap[language.toLowerCase()] || 'en';
 
-    // Load system prompt (English only - vision models handle multilingual)
-    const systemPromptPath = `/home/dr-ninja/Desktop/dev_general/ai-tools/prompts/scene-mood/en.md`;
+    // Load system prompt based on language
+    const systemPromptPath = path.join(
+      process.cwd(),
+      `prompts/scene-mood/${langCode}.md`
+    );
     const fs = await import('fs/promises');
     let systemPrompt = await fs.readFile(systemPromptPath, 'utf-8');
 
-    // Replace {{language}} placeholder
+    // Replace placeholders in system prompt
     systemPrompt = systemPrompt.replace(/\{\{language\}\}/g, language);
+    systemPrompt = systemPrompt.replace(/\{\{variant\}\}/g, variant);
+    systemPrompt = systemPrompt.replace(/\{\{analysisDepth\}\}/g, analysisDepth);
+
+    // Add variant-specific instructions
+    if (variant === 'detailed') {
+      systemPrompt += '\n\nProvide a DETAILED analysis with:' +
+        '\n- Comprehensive mood description (emotions, atmosphere)' +
+        '\n- Detailed lighting analysis (source, quality, color temperature, direction)' +
+        '\n- In-depth composition breakdown (rule of thirds, leading lines, balance, focal points)' +
+        '\n- Color palette analysis' +
+        '\n- Texture and depth assessment';
+    }
+
+    // Add analysis depth instructions
+    if (analysisDepth === 'comprehensive') {
+      systemPrompt += '\n\nPerform a COMPREHENSIVE analysis covering all visual aspects in detail.';
+    }
+
+    // Select model based on analysisDepth (comprehensive gets more capable model)
+    const model = analysisDepth === 'comprehensive' 
+      ? 'meta-llama/llama-3.2-90b-vision-instruct:free'
+      : 'google/gemini-2.0-flash-exp:free';
 
     // Call OpenRouter vision API
     const apiKey = process.env.OPENROUTER_API_KEY;
@@ -98,7 +111,7 @@ export async function POST(request: NextRequest) {
             role: 'user',
             content: [
               { type: 'text', text: systemPrompt },
-              { type: 'image_url', image_url: { url: image } },
+              { type: 'image_url', image_url: { url: imageData } },
             ],
           },
         ],
@@ -120,8 +133,12 @@ export async function POST(request: NextRequest) {
       id: crypto.randomUUID(),
       toolId: 'scene-mood-describer',
       status: 'completed',
-      content,
+      result: content, // Use 'result' to match the page component expectation
+      content, // Keep 'content' for backward compatibility
       metadata: {
+        variant,
+        analysisDepth,
+        language,
         model,
         tokensUsed: data.usage?.total_tokens || 0,
         processingTime,

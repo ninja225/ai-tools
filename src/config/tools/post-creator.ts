@@ -9,6 +9,7 @@ export const postCreatorTool: ToolConfig = {
   
   defaultModel: 'arcee-ai/trinity-large-preview:free',
   allowedModels: [
+    'arcee-ai/trinity-large-preview:free',
     'arcee-ai/trinity-mini:free',
     'openai/gpt-oss-120b:free',
     'deepseek/deepseek-r1-0528:free',
@@ -59,7 +60,14 @@ export const postCreatorTool: ToolConfig = {
     },
   ],
   
-  variants: [],
+  variants: [
+    {
+      id: 'post-creator',
+      name: 'Social Media Post',
+      description: 'Create engaging social media posts',
+      systemPromptPath: '/prompts/post/{lang}.md',
+    },
+  ],
   
   settings: {
     maxTokens: 1200,

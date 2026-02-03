@@ -9,6 +9,7 @@ export const reelsCreatorTool: ToolConfig = {
   
   defaultModel: 'arcee-ai/trinity-large-preview:free',
   allowedModels: [
+    'arcee-ai/trinity-large-preview:free',
     'arcee-ai/trinity-mini:free',
     'openai/gpt-oss-120b:free',
     'deepseek/deepseek-r1-0528:free',
@@ -35,7 +36,14 @@ export const reelsCreatorTool: ToolConfig = {
     },
   ],
   
-  variants: [],
+  variants: [
+    {
+      id: 'reels-creator',
+      name: 'Reels Script',
+      description: 'Create engaging scripts for Instagram Reels',
+      systemPromptPath: '/prompts/reels/{lang}.md',
+    },
+  ],
   
   settings: {
     maxTokens: 3000,

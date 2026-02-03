@@ -28,11 +28,28 @@ export const executeTool = async (
     throw new Error(`Model "${modelId}" is not allowed for this tool`);
   }
 
-  // Load system prompt
-  const systemPrompt = await loadSystemPrompt(variant);
+  // Extract language from inputs and load appropriate system prompt
+  const language = String(request.inputs.language || 'english');
+  let systemPrompt = await loadSystemPrompt(variant, language);
+
+  // Replace placeholders in system prompt with actual user values
+  systemPrompt = replacePlaceholders(systemPrompt, request.inputs, variant);
 
   // Build user message from inputs
-  const userMessage = buildUserMessage(tool, request.inputs);
+  const userMessage = buildUserMessage(tool, request.inputs, variant);
+
+  // Log the prompts for debugging
+  console.log('\n' + '='.repeat(80));
+  console.log(`[TOOL EXECUTOR] Tool: ${tool.id} | Variant: ${variant.name} | Language: ${language}`);
+  console.log('='.repeat(80));
+  console.log('\n[SYSTEM PROMPT]');
+  console.log('-'.repeat(80));
+  console.log(systemPrompt);
+  console.log('-'.repeat(80));
+  console.log('\n[USER MESSAGE]');
+  console.log('-'.repeat(80));
+  console.log(userMessage);
+  console.log('-'.repeat(80));
 
   // Call OpenRouter
   const result = await createCompletion({
@@ -44,6 +61,16 @@ export const executeTool = async (
     topP: tool.settings.topP,
   });
 
+  // Log the response
+  console.log('\n[MODEL RESPONSE]');
+  console.log('-'.repeat(80));
+  console.log(`Model: ${modelId}`);
+  console.log(`Tokens Used: ${result.tokensUsed}`);
+  console.log('-'.repeat(80));
+  console.log(result.content);
+  console.log('-'.repeat(80));
+  console.log('\n' + '='.repeat(80) + '\n');
+
   return {
     content: result.content,
     model: modelId,
@@ -51,36 +78,85 @@ export const executeTool = async (
   };
 };
 
-async function loadSystemPrompt(variant: ToolVariant): Promise<string> {
+async function loadSystemPrompt(variant: ToolVariant, language: string): Promise<string> {
   try {
+    // Map language input to file suffix
+    const langMap: Record<string, string> = {
+      'english': 'en',
+      'russian': 'ru',
+      'arabic': 'ar',
+      'en': 'en',
+      'ru': 'ru',
+      'ar': 'ar',
+    };
+    
+    const langCode = langMap[language.toLowerCase()] || 'en';
+    
+    // Replace the language placeholder in systemPromptPath
+    // e.g., '/prompts/story/{lang}.md' -> '/prompts/story/en.md'
     const promptPath = path.join(
       process.cwd(),
-      'src',
-      'prompts',
-      `${variant.systemPromptPath}`
+      variant.systemPromptPath.replace('{lang}', langCode)
     );
+    
     const content = await fs.readFile(promptPath, 'utf-8');
     return content;
   } catch (error) {
     throw new Error(
-      `Failed to load system prompt from "${variant.systemPromptPath}": ${
+      `Failed to load system prompt from "${variant.systemPromptPath}" for language "${language}": ${
         error instanceof Error ? error.message : 'Unknown error'
       }`
     );
   }
 }
 
+function replacePlaceholders(
+  prompt: string,
+  inputs: Record<string, string | number>,
+  variant: ToolVariant
+): string {
+  let result = prompt;
+
+  // Replace {{variant}} with variant name
+  result = result.replace(/\{\{variant\}\}/g, variant.name);
+
+  // Replace all input values ({{topic}}, {{tone}}, {{length}}, {{language}}, etc.)
+  for (const [key, value] of Object.entries(inputs)) {
+    const placeholder = new RegExp(`\\{\\{${key}\\}\\}`, 'g');
+    result = result.replace(placeholder, String(value));
+  }
+
+  // Log warning if any placeholders remain
+  const remainingPlaceholders = result.match(/\{\{[^}]+\}\}/g);
+  if (remainingPlaceholders) {
+    console.warn('[EXECUTOR] Warning: Unresolved placeholders:', remainingPlaceholders);
+  }
+
+  return result;
+}
+
 function buildUserMessage(
   tool: ToolConfig,
-  inputs: Record<string, string | number>
+  inputs: Record<string, string | number>,
+  variant: ToolVariant
 ): string {
   const lines: string[] = [];
+
+  // Add variant context if it's meaningful (not just the tool name)
+  if (variant.id !== tool.id) {
+    lines.push(`Content Type: ${variant.name}`);
+  }
 
   for (const input of tool.inputs) {
     const value = inputs[input.id];
 
     if (input.required && (value === undefined || value === '')) {
       throw new Error(`Required input "${input.label}" is missing`);
+    }
+
+    // Skip language as it's used for prompt selection, not content
+    if (input.id === 'language') {
+      continue;
     }
 
     if (value !== undefined && value !== '') {

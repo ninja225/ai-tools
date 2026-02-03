@@ -9,6 +9,7 @@ export const storyCreatorTool: ToolConfig = {
   
   defaultModel: 'arcee-ai/trinity-large-preview:free',
   allowedModels: [
+    'arcee-ai/trinity-large-preview:free',
     'arcee-ai/trinity-mini:free',
     'openai/gpt-oss-120b:free',
     'deepseek/deepseek-r1-0528:free',
@@ -73,7 +74,32 @@ export const storyCreatorTool: ToolConfig = {
     },
   ],
   
-  variants: [],
+  variants: [
+    {
+      id: 'general',
+      name: 'General Story',
+      description: 'General purpose story for any platform',
+      systemPromptPath: '/prompts/story/{lang}.md',
+    },
+    {
+      id: 'tiktok',
+      name: 'TikTok Story',
+      description: 'Story optimized for TikTok format',
+      systemPromptPath: '/prompts/story/{lang}.md',
+    },
+    {
+      id: 'reels',
+      name: 'Instagram Reels',
+      description: 'Story optimized for Instagram Reels',
+      systemPromptPath: '/prompts/story/{lang}.md',
+    },
+    {
+      id: 'short',
+      name: 'Short Form',
+      description: 'Short story for quick consumption',
+      systemPromptPath: '/prompts/story/{lang}.md',
+    },
+  ],
   
   settings: {
     maxTokens: 1500,
